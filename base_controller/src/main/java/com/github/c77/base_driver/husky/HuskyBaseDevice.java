@@ -123,9 +123,7 @@ public class HuskyBaseDevice implements BaseDevice {
     private void updateReceivedData(final byte[] bytes) {
         try {
             HuskyPacketReader.HuskyPacket packet = packetReader.parse(ByteBuffer.wrap(bytes));
-            log.info("-- IN -->" + packet);
             if(packet != null && packet.getMessageType() == HuskyPacketReader.HuskyPacket.TYPE_ENCODER_DATA) {
-                log.info("Got encoder data!");
                 odometryStatus.update(packet.getPayload());
             }
         } catch (HuskyPacketReader.Exception e) {
